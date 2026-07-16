@@ -10,12 +10,8 @@ public:
         sort(nums.begin(),nums.end());
 
         long long ans=0;
-        int p1=0;
-        int p2=n-1;
-
-        while(p1<p2){
-            ans+=gcd(nums[p1],nums[p2]);
-            p1++;p2--;
+        for(int i=0,j=n-1;i<j;i++,j--){
+            ans+=gcd(nums[i],nums[j]);
         }
         return ans;
     }
