@@ -3,25 +3,20 @@ public:
     string smallestPalindrome(string s) {
         int n=s.size();
         
-        map<char,int> m;
-        for(char ch:s){
-            m[ch]++;
-        }   
-
-        string s1="";
-        string s2="";
-
-        for(auto a:m){
-            if(a.second%2){
-                s2=a.first;
-            }
-            int num=a.second/2;
-            while(num--)s1+=a.first;
+        vector<int> v(26);
+        for(int i=0;i<n/2;i++){
+            v[s[i]-'a']++;
         }
 
-        string ans=s1+s2;
-        reverse(s1.begin(),s1.end());
+        int p1=0;
+        int p2=n-1;
+        for(int i=0;i<26;i++){
+            while(v[i]--){
+                s[p1++]=char(i+'a');
+                s[p2--]=char(i+'a');
+            }
+        }
 
-        return ans+s1;
+        return s;
     }
 };
