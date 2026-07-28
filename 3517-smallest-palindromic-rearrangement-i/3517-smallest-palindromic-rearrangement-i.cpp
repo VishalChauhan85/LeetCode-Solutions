@@ -12,8 +12,9 @@ public:
         int p2=n-1;
         for(int i=0;i<26;i++){
             while(v[i]--){
-                s[p1++]=char(i+'a');
-                s[p2--]=char(i+'a');
+                char ch=char(i+'a');
+                s[p1++]=ch;
+                s[p2--]=ch;
             }
         }
 
