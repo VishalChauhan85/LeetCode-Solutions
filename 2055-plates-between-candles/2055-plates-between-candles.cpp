@@ -8,31 +8,21 @@ public:
         vector<int> pre(n,num);
         vector<int> post(n,num);
 
-        int count=0;
-        int p1=0;
-        for(int i=0;i<n;i++){
-            if(s[i]=='|'){
-                int j=i;
-                while(j>=p1){
-                    pre[j]=count;
-                    j--;
-                }
-                p1=i+1;
-            }else count++;
+        int p1=num;
+        for(int i=n-1;i>=0;i--){
+            if(s[i]=='*'){
+                if(i!=n-1)pre[i]=pre[i+1];                
+                p1--;
+            }else pre[i]=p1;
         }
         
-        p1=n-1;
-        count=0;
-
-        for(int i=n-1;i>=0;i--){
-            if(s[i]=='|'){
-                int j=i;
-                while(j<=p1){
-                    post[j]=count;
-                    j++;
-                }
-                p1=i-1;
-            }else count++;
+        p1=num;
+        for(int i=0;i<n;i++){
+            if(s[i]=='*'){
+                if(i!=0)post[i]=post[i-1];
+                p1--;
+                
+            }else post[i]=p1;
         }
 
         vector<int> ans;
