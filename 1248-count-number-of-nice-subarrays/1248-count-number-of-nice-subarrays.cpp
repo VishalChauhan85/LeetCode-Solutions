@@ -5,12 +5,12 @@ public:
         int ans=0;
         int count=0;
         
-        unordered_map<int,int> m;
+        vector<int> m(n+1,0);
         m[0]=1;
 
         for(int i=0;i<n;i++){
             count+=(nums[i]%2);
-            if(m.find(count-k)!=m.end()){
+            if(count-k>=0){
                 ans+=m[count-k];
             }
             m[count]++;
