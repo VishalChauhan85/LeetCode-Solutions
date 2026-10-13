@@ -11,24 +11,19 @@
  */
 class Solution {
 public:
-    int length(TreeNode* root,vector<int>& v){
+    int length(TreeNode* root,int& ma){
         if(root==NULL)return 0;
-        int l=length(root->left,v)+1;
-        int r=length(root->right,v)+1;
-        v.push_back(l+r-1);  
-        return max(l,r);      
+        int l=length(root->left,ma);
+        int r=length(root->right,ma);
+        ma=max(ma,l+r);  
+        return max(l,r)+1;      
     }
 
     int diameterOfBinaryTree(TreeNode* root) {
         if(root==NULL)return 0;
-        vector<int> v;
-        int l=length(root->left,v)+1;
-        int r=length(root->right,v)+1;
-        v.push_back(l+r-1);
-        length(root,v);
-
-        int ans=0;
-        for(int i:v)ans=max(ans,i-1);
-        return ans;
+        int ma=0;
+        length(root,ma);
+        
+        return ma;
     }
 };
