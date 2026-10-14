@@ -11,25 +11,20 @@
  */
 class Solution {
 public:
-    void solve(vector<string>& ans,string s,TreeNode* root){
-        if(root==NULL){
-            ans.push_back(s);
-            return;
-        }
+    void solve(vector<string>& ans,string& s,TreeNode* root){
+        if(root==NULL)return;
 
+        int n=s.size();
         if(s=="")s=to_string(root->val);
         else s+="->"+to_string(root->val);
+
         if(root->left==NULL && root->right==NULL){
             ans.push_back(s);
-        }
-
-        if(root->left!=NULL){
+        }else{
             solve(ans,s,root->left);
-        }
-        if(root->right!=NULL){
             solve(ans,s,root->right);
         }
-        
+        s.resize(n);
     }
     vector<string> binaryTreePaths(TreeNode* root) {
         vector<string> ans;
