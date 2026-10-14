@@ -11,18 +11,12 @@
  */
 class Solution {
 public:
-    int search(vector<int>& inorder,int& num,int left,int right){
-        int n=inorder.size();
-        for(int i=left;i<=right;i++){
-            if(inorder[i]==num)return i;
-        }
-        return -1;
-    }
+    unordered_map<int,int> m;
     TreeNode* build(vector<int>& preorder, vector<int>& inorder,int& inx,int l,int r){
         if(l>r)return NULL;
 
         TreeNode* Node=new TreeNode(preorder[inx]);
-        int num=search(inorder,preorder[inx],l,r);
+        int num=m[preorder[inx]];
         inx++;
 
         Node->left=build(preorder,inorder,inx,l,num-1);
@@ -33,6 +27,8 @@ public:
 
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         int inx=0;
+        int n=inorder.size();
+        for(int i=0;i<n;i++)m[inorder[i]]=i;
         TreeNode* ans=build(preorder,inorder,inx,0,preorder.size()-1);
         return ans;
     }
