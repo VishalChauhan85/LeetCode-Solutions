@@ -1,39 +1,44 @@
 class Solution {
 public:
-    void dfs(vector<vector<int>>& grid,vector<vector<int>>& v,int i,int j,int num){
-        if(i<0 || i>=grid.size() || j<0 || j>=grid[0].size() || grid[i][j]==0)return;
-
-        if(v[i][j]>num)v[i][j]=num;
-        else return;
-
-        dfs(grid,v,i+1,j,num+1);
-        dfs(grid,v,i-1,j,num+1);
-        dfs(grid,v,i,j+1,num+1);
-        dfs(grid,v,i,j-1,num+1);
-    }
     int orangesRotting(vector<vector<int>>& grid) {
         int n=grid.size();
         int m=grid[0].size();
-        vector<vector<int>> v(n,vector<int> (m,INT_MAX));
 
+        queue<pair<int,int>> q;
+        int count=0;
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(grid[i][j]==2)dfs(grid,v,i,j,0);
+                if(grid[i][j]==2)q.push({i,j});
+                else if(grid[i][j]==1)count++;
             }
         }
 
         int ans=0;
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                cout<<v[i][j]<<" ";
-                if(grid[i][j]!=0)ans=max(ans,v[i][j]);
+        while(!q.empty() && count!=0){
+            ans++;
+            int num=q.size();
+            
+            for(int i=0;i<num;i++){
+                vector<int> col={0,0,-1,1};
+                vector<int> row={-1,1,0,0};
+
+                for(int j=0;j<4;j++){
+                    int Row=q.front().first+row[j];
+                    int Col=q.front().second+col[j];
+                    if(Row<0 || Col<0 || Row>=n || Col>=m || grid[Row][Col]!=1)continue;
+
+                    grid[Row][Col]=2;
+                    q.push({Row,Col});
+                    count--;
+                }
+
+                q.pop();
             }
-            cout<<endl;
+
         }
 
-        if(ans==INT_MAX)return -1;
+        if(count!=0)return -1;
         return ans;
-
 
     }
 };
