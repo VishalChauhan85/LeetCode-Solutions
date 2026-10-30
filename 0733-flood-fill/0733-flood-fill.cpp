@@ -1,10 +1,11 @@
 class Solution {
 public:
     void bfs(auto& image,int sr,int sc,int& color,auto& v,int& org){
-        if(sr<0 || sc<0 || sr>=image.size() || sc>=image[0].size() || image[sr][sc]!=org ||v[sr][sc])return;
-
-        image[sr][sc]=color;
+        if(sr<0 || sc<0 || sr>=image.size() || sc>=image[0].size() ||v[sr][sc])return;
         v[sr][sc]=true;
+
+        if(image[sr][sc]!=org)return;
+        image[sr][sc]=color;
         bfs(image,sr+1,sc,color,v,org);
         bfs(image,sr-1,sc,color,v,org);
         bfs(image,sr,sc+1,color,v,org);
