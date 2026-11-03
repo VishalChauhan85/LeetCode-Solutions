@@ -11,7 +11,7 @@ public:
 
         for(auto& a:nums3){
             for(auto& b:nums4){
-                ans+=m[0-(a+b)];
+                if(m.count(0-(a+b)))ans+=m[0-(a+b)];
             }
         }
 
