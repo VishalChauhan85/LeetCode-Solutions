@@ -16,9 +16,11 @@ public:
             ans+=a.first;
             ask[a.second]=true;
             for(int i=0;i<n;i++){
-                int num=abs(points[i][0]-points[a.second][0]);
-                num+=abs(points[i][1]-points[a.second][1]);
-                q.push({num,i});
+                if(!ask[i]){
+                    int num=abs(points[i][0]-points[a.second][0]);
+                    num+=abs(points[i][1]-points[a.second][1]);
+                    q.push({num,i});
+                }
             }
         }
 
