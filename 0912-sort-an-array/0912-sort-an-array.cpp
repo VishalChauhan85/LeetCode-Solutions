@@ -1,31 +1,29 @@
 class Solution {
 public:
-    vector<int> merge(vector<int>& nums,int p1,int p2){
-        if(p1>p2)return {};
-        if(p1==p2)return {nums[p1]};
+    void merge(vector<int>& nums,int p1,int p2){
+        if(p1>=p2)return;
 
         int mid=p1+(p2-p1)/2;
-        vector<int> left=merge(nums,p1,mid);
-        vector<int> right=merge(nums,mid+1,p2);
-
-        int n=left.size();
-        int m=right.size();
+        merge(nums,p1,mid);
+        merge(nums,mid+1,p2);
 
         vector<int> v;
-        int a=0;
-        int b=0;
-
-        while(a<n && b<m){
-            if(left[a]<right[b])v.push_back(left[a++]);
-            else v.push_back(right[b++]);
+        int a=p1;
+        int b=mid+1;
+        while(a<=mid && b<=p2){
+            if(nums[a]<nums[b])v.push_back(nums[a++]);
+            else v.push_back(nums[b++]);
         }
 
-        while(a<n)v.push_back(left[a++]);
-        while(b<m)v.push_back(right[b++]);
+        while(a<=mid)v.push_back(nums[a++]);
+        while(b<=p2)v.push_back(nums[b++]);
 
-        return v;
+        for(int i=0;i<v.size();i++){
+            nums[p1+i]=v[i];
+        }
     }
     vector<int> sortArray(vector<int>& nums) {
-        return merge(nums,0,nums.size()-1);
+        merge(nums,0,nums.size()-1);
+        return nums;
     }
 };
