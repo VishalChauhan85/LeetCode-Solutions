@@ -3,8 +3,12 @@ public:
     int findNumbers(vector<int>& nums) {
         int ans=0;
         for(int i:nums){
-            string s=to_string(i);
-            if(!(s.size()%2))ans++;
+            int num=0;
+            while(i>0){
+                num++;
+                i/=10;
+            }
+            if(!(num%2))ans++;
         }
         return ans;
     }
