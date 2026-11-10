@@ -1,8 +1,8 @@
 class Solution {
 public:
     vector<string> q={"1"};
-    Solution(){
-        for(int j=1;j<30;j++){
+    string countAndSay(int n) {
+        for(int j=1;j<n;j++){
             string a;
             int n=q[j-1].size();
             string v=q[j-1];
@@ -17,8 +17,6 @@ public:
             }
             q.push_back(a);
         }
-    }
-    string countAndSay(int n) {
         return q[n-1];
     }
 };
