@@ -6,7 +6,7 @@ public:
         
         vector<int> v(3,-1);
         for(int i=0;i<n;i++){
-            v[(s[i]&31)-1]=i;
+            v[s[i]-'a']=i;
             ans+=min({v[0],v[1],v[2]})+1;
         }
 
