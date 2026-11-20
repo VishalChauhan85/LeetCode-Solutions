@@ -5,9 +5,10 @@ public:
         for(char ch:s){
             if(ch=='('||ch=='{'||ch=='[')st.push(ch);
             else{
-                if(!st.empty()&&ch==')' && st.top()=='(')st.pop();
-                else if(!st.empty() && ch=='}' && st.top()=='{')st.pop();
-                else if(!st.empty()&&ch==']' && st.top()=='[')st.pop();
+                if(st.empty())return false;
+                if(ch==')' && st.top()=='(')st.pop();
+                else if(ch=='}' && st.top()=='{')st.pop();
+                else if(ch==']' && st.top()=='[')st.pop();
                 else return false;
             }
         }
