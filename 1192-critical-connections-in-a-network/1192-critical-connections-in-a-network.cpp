@@ -6,7 +6,7 @@ public:
     void dfs(int u,int par,vector<vector<int>>& graph,vector<vector<int>>& ans){
         dt[u]=low[u]=++time;
 
-        for(auto a:graph[u]){
+        for(const int& a:graph[u]){
             if(dt[a]==-1){
                 dfs(a,u,graph,ans);
                 low[u]=min(low[u],low[a]);
@@ -24,7 +24,7 @@ public:
 
         vector<vector<int>> ans;
         vector<vector<int>> graph(n);
-        for(auto a:connections){
+        for(const auto& a:connections){
             graph[a[0]].push_back(a[1]);
             graph[a[1]].push_back(a[0]);
         }
